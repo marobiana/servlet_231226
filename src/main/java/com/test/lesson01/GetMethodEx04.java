@@ -15,6 +15,8 @@ public class GetMethodEx04 extends HttpServlet {
 	public void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		
+		// 클론에서 주석 추가
+		
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 		
