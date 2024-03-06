@@ -17,6 +17,8 @@ public class CharacterEncodingFilter implements Filter {
 			ServletResponse response, 
 			FilterChain chain) throws IOException, ServletException {
 		
+		// 깃허브 테스트용 주석
+		
 		// 필터 통과시 인코딩 설정
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
