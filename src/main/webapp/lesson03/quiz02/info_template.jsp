@@ -27,7 +27,7 @@
 			<jsp:include page="menu.jsp" />
 		</nav>
 		<section class="contents">
-			
+			<jsp:include page="info.jsp" />
 		</section>
 		<footer>
 			<jsp:include page="footer.jsp" />
