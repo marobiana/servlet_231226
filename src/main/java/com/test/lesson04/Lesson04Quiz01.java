@@ -1,5 +1,8 @@
 package com.test.lesson04;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +17,7 @@ public class Lesson04Quiz01 extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws IOException {
 		
 		// 응답
 		response.setContentType("text/plain");
@@ -35,6 +38,20 @@ public class Lesson04Quiz01 extends HttpServlet {
 		}
 		
 		// 셀렉트(db) => 출력
+		String selectQuery = "select `address`, `area`, `type` from `real_estate`"
+				+ "order by `id` desc "
+				+ "limit 10";
+		try {
+			ResultSet resultSet = ms.select(selectQuery);
+			PrintWriter out = response.getWriter();
+			while (resultSet.next()) {
+				out.print("매물 주소:" + resultSet.getString("address"));
+				out.print(", 면적:" + resultSet.getInt("area"));
+				out.println(", 타입:" + resultSet.getString("type"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		// 디비 연결 해제
 		ms.disconnect();
