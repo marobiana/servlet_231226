@@ -10,32 +10,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.test.common.MysqlService;
 
-@WebServlet("/lesson04/ex02_insert")
-public class InsertEx02 extends HttpServlet {
+@WebServlet("/lesson04/ex02_delete")
+public class DeleteEx02 extends HttpServlet {
 
 	@Override
-	public void doPost(HttpServletRequest request,
+	public void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		
 		// 응답 형태 생략
 		
-		// request params
-		String name = request.getParameter("name");
-		String yyyymmdd = request.getParameter("yyyymmdd");
-		String email = request.getParameter("email");
-		String introduce = request.getParameter("introduce");
+		// Request Param
+		int id = Integer.valueOf(request.getParameter("id"));
 		
 		// DB 연결
 		MysqlService ms = MysqlService.getInstance();
 		ms.connect();
 		
-		// DB Insert
-		String insertQuery = "insert into `new_user`"
-				+ "(`name`, `yyyymmdd`, `email`, `introduce`)"
-				+ "values"
-				+ "('" + name + "', '" + yyyymmdd + "', '" + email + "', '" + introduce + "')";
+		// DB delete
+		String deleteQuery = "delete from `new_user` where `id` = " + id;
 		try {
-			ms.update(insertQuery);
+			ms.update(deleteQuery);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -43,10 +37,11 @@ public class InsertEx02 extends HttpServlet {
 		// DB 연결 해제
 		ms.disconnect();
 		
-		// 목록 화면으로 이동 - 302 Redirect
+		// 목록 화면 이동 => 302 리다이렉트
 		response.sendRedirect("/lesson04/ex02/ex02_1.jsp");
 	}
 }
+
 
 
 
